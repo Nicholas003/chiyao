@@ -1,0 +1,33 @@
+
+
+
+<view class="padding solid margin-sm shadow bg-white" style="border-radius: 10rpx;">
+	<view class="flex justify-between align-center">
+		<view>
+			<view class="flex align-center">
+				<view class="padding-xs solid text-xl bg-blue" style="border-radius: 5rpx;font-weight: bold;">
+					08:00
+				</view>
+				<view class="margin-left text-bold text-xl">
+					阿莫西林
+				</view>
+			</view>
+			<view class="flex margin-top-sm">
+				<view class="text-lg">
+					剂量：1片
+				</view>
+				<view class="text-lg margin-left-xl">
+					提醒给：自己
+				</view>
+			</view>
+		</view>
+		<view class="">
+			<view class="margin-left text-bold">
+				<view class="margin-tb-sm">
+					<text class="cuIcon-check"></text>
+					已完成
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
