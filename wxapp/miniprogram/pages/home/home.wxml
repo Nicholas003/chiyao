@@ -1,7 +1,5 @@
-
-
-
-<view class="padding solid margin-sm shadow bg-white" style="border-radius: 10rpx;">
+<view class="padding-lr padding-tb-xs solid margin-sm shadow bg-white" bind:tap="action" data-index="{{index}}" wx:key
+ wx:for="{{10}}" style="border-radius: 10rpx;">
 	<view class="flex justify-between align-center">
 		<view>
 			<view class="flex align-center">
@@ -23,10 +21,31 @@
 		</view>
 		<view class="">
 			<view class="margin-left text-bold">
-				<view class="margin-tb-sm">
-					<text class="cuIcon-check"></text>
-					已完成
+				<view class="margin-tb-sm text-center">
+					<!-- <view>
+						<text class="cuIcon-check"></text>
+						已完成
+					</view> -->
+					<view>
+						<view>
+							超时
+						</view>
+						<view>
+							6时52分
+						</view>
+					</view>
 				</view>
+			</view>
+		</view>
+	</view>
+	<view class="two-btn {{index==show_index?'action':''}}">
+		<view class="margin-top flex justify-between">
+			<view class="cu-btn round " catchtap>
+				忽略
+			</view>
+			<!-- <button class="cu-btn round bg-green sm">完成</button> -->
+			<view class="cu-btn round bg-green" catchtap>
+				完成
 			</view>
 		</view>
 	</view>
