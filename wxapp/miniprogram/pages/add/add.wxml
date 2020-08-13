@@ -1,11 +1,12 @@
 <view class="margin-lr">
+	<view class="margin-tb">
+		基础选项
+	</view>
 	<view class="cu-form-group">
 		<view class="title">名称</view>
 		<input placeholder="请输入药品名称或扫码"></input>
 		<text class="cuIcon-scan text-orange"></text>
 	</view>
-	
-	
 	
 	<view class="cu-form-group" wx:for="{{eat_time}}">
 		<view class="title">第{{index+1}}次吃药时间</view>
@@ -20,7 +21,38 @@
 		<button class="cu-btn bg-green shadow margin-left-xs" bind:tap="add_time">
 			<text class="cuIcon-add"></text>
 		</button>
+	</view>
+	<view class="margin-tb">
+		更多选项（选填）
+	</view>
+	<view class="cu-form-group cc">
+		<view class="title">用量</view>
+		<picker  mode="multiSelector" value="{{consumption_index}}" range="{{consumption}}" bind:change="change_consumption">
+			<view class="picker">
+				<view class="text-gray" wx:if="{{!consumption_index[0]&&!consumption_index[1]}}">
+					未设置
+					
+				</view>
+				<view wx:else>
+					{{consumption[0][consumption_index[0]]}}{{consumption[1][consumption_index[1]]}}{{consumption[2][consumption_index[2]]}}
+				</view>
+			</view>
+		</picker>
+	</view>
+	<view class="cu-form-group cc">
+		<view class="title">重复周期</view>
+		<picker  mode="selector"  value="{{cycle_index}}" range="{{cycle}}">
+			<view class="picker">
+				1232
+			</view>
+		</picker>
 		
+	</view>
+	<view class="flex">
+		<view wx:for="{{7}}">周{{index}}</view>
+	</view>
+	<view class="padding flex flex-direction margin-top-xl">
+	  <button class="cu-btn bg-green lg">确定</button>
 	</view>
 </view>
 

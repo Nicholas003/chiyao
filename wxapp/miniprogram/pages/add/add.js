@@ -15,7 +15,15 @@ Page({
 		  {
 		  	time:'--:--'
 		  }
-	  ]
+	  ],
+	  consumption:[
+		  [],
+		  [],
+		  ['片','克','毫克','毫升','杯','国际单位'],
+	  ],
+	  cycle:['每天','每周'],
+	  cycle_index:0,
+	  consumption_index: [0, 0, 0],
   },
   TimeChange({currentTarget:{dataset:{index}},detail:{value}}){
 	  
@@ -55,9 +63,32 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+	  
+	  let one = [];
+	  
+	  let two = [];
+	  
+	  for(let i=0;i<99;i++){
+		  if(i<10){
+			  two.push(`.${i}`);
+		  }
+		  one.push(i)
+	  }
+	  this.setData({
+		  'consumption[0]':one,
+		  'consumption[1]':two,
+	})
   },
-
+  change_consumption({detail:{value}}){
+	  
+	  
+	  this.setData({
+		  consumption_index:value
+	  })
+	  
+	  // console.log(e)
+	  
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

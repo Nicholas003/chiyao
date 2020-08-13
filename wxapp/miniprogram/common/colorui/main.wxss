@@ -2434,7 +2434,7 @@ button.icon.lg {
 	text-align: center;
 	top: 0;
 	bottom: 0;
-	right: -20rpx;
+	/* right: -20rpx; */
 	margin: auto;
 }
 
