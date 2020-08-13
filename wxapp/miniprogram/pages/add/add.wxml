@@ -41,16 +41,19 @@
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">重复周期</view>
-		<picker  mode="selector"  value="{{cycle_index}}" range="{{cycle}}">
+		<picker  mode="selector"  value="{{cycle_index}}" bind:change="zq_change"  range="{{cycle}}">
 			<view class="picker">
-				1232
+				{{cycle[cycle_index]}}
 			</view>
 		</picker>
 		
 	</view>
-	<view class="flex">
-		<view wx:for="{{7}}">周{{index}}</view>
-	</view>
+	<view class="grid col-4 padding-sm" wx:if="{{cycle_index==1}}">
+	      <view wx:for="{{week}}" class="padding-xs" wx:key="{{index}}">
+	        <button class="cu-btn sm orange block {{item.checked?'bg-orange':'line-orange'}}" data-index="{{index}}" bindtap="ChooseCheckbox"> {{item.name}}
+	        </button>
+	      </view>
+	    </view>
 	<view class="padding flex flex-direction margin-top-xl">
 	  <button class="cu-btn bg-green lg">确定</button>
 	</view>
