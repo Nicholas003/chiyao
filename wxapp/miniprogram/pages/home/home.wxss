@@ -1,1 +1,14 @@
-/* miniprogram/pages/home/home.wxss */
+
+
+.two-btn{
+	
+	max-height: 0rpx;
+	overflow: hidden;
+	transition: all .3s;
+	
+}
+
+.two-btn.action{
+	transition: all .3s ease-in;
+	max-height: 100rpx;
+}

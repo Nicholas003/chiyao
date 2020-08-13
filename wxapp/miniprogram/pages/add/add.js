@@ -1,23 +1,56 @@
-// miniprogram/pages/home/home.js
+// miniprogram/pages/add/add.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-	  show_index:0
+	  eat_time:[
+		  {
+			time:'08:00'
+		  },
+		  {
+			time:'12:30'
+		  },
+		  {
+		  	time:'--:--'
+		  }
+	  ]
   },
-  
-  action({currentTarget:{dataset:{index}}}){
-	  // console.log(e)
-	  if(this.data.show_index==index){
-		  index=null
-	  }
+  TimeChange({currentTarget:{dataset:{index}},detail:{value}}){
+	  
+	  console.log(index,value)
+	  // this.data.eat_time[index].time = value;
+	  let key = `eat_time[${index}].time`;
 	  this.setData({
-		  show_index:index
+		  [key]:value
+	  })
+	  
+  },
+  move_time({currentTarget:{dataset:{index}}}){
+	  console.log(index);
+	  let {eat_time} = this.data;
+	  
+	  eat_time.splice(index,1);
+	  
+	  this.setData({
+		  eat_time
 	  })
   },
-  
+  add_time(){
+	  
+	let data =  {time:''};
+	
+	let {eat_time} = this.data;
+	
+	eat_time.push(data);
+	
+	this.setData({
+		eat_time
+	})
+	  
+	  
+  },
   /**
    * 生命周期函数--监听页面加载
    */

@@ -25,8 +25,16 @@
 			"outputPath": ""
 		},
 		"useIsolateContext": true,
+<<<<<<< HEAD
 		"useCompilerModule": false,
 		"userConfirmedUseCompilerModuleSwitch": false
+=======
+		"nodeModules": false,
+		"enhance": true,
+		"useCompilerModule": true,
+		"userConfirmedUseCompilerModuleSwitch": false,
+		"showShadowRootInWxmlPanel": true
+>>>>>>> 31a7b4c14d281d445c34974c11efd4d32e23d04a
 	},
 	"appid": "wx68e0d2389194cf88",
 	"projectname": "wxapp",
@@ -49,13 +57,24 @@
 		"game": {
 			"list": []
 		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
 		"miniprogram": {
 			"current": 0,
 			"list": [
 				{
 					"id": -1,
 					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
+					"pathName": "pages/databaseGuide/databaseGuide",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "pages/add/add",
+					"pathName": "pages/add/add",
+					"scene": null
 				}
 			]
 		}
