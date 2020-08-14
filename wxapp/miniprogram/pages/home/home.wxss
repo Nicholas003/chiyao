@@ -9,6 +9,6 @@
 }
 
 .two-btn.action{
-	transition: all .3s ease-in;
+	transition: all .3s;
 	max-height: 100rpx;
 }

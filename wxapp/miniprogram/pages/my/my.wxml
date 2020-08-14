@@ -1,0 +1,7 @@
+
+
+
+<loginBtn show="{{show_login_btn}}"></loginBtn>
+<view class="padding flex flex-direction margin-top-xl">
+	<button class="cu-btn bg-green lg" bind:tap="ding">订阅消息</button>
+</view>

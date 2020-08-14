@@ -1,7 +1,7 @@
 Page({
 
   data: {
-    templateId: '',
+    templateId: 'UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc',
     subscribeMessageResult: '',
     requestSubscribeMessageResult: '',
     wxacodeSrc: '',

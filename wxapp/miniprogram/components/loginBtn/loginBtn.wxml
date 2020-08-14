@@ -1,0 +1,22 @@
+<view>
+		<view class="mask {{show?'show':''}}">
+			<view class="window" >
+				<view class="pople">
+					<text class="cuIcon-people"></text>
+				</view>
+				<view class="title">
+					您还未登录
+				</view>
+				<view class="sub">
+					相关操作请登陆后体验
+				</view>
+				<view>
+					<button open-type="getUserInfo" bind:getuserinfo="userinfo" class="login-btn btn">立即登录</button>
+				</view>
+				<view class="no-login btn" bind:tap="hide">
+					暂不登录
+				</view>
+			</view>
+		</view>
+		
+	</view>
