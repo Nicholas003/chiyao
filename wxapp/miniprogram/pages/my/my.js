@@ -14,11 +14,19 @@ Page({
 
   async ding() {
     console.log(123)
-    
+    wx.cloud.callFunction({
+			name: "login",
+			success: (res) => {
+				console.log(res)
+			},
+			fail(err){
+				console.log(err)
+			}
+		});
 	
-	this.setData({
-		show_login_btn:true
-	})
+	// this.setData({
+	// 	show_login_btn:true
+	// })
 	
 	// let res = await app.db.collection('Member').add({
 	// 	data:{

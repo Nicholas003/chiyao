@@ -48,6 +48,15 @@
 		</picker>
 		
 	</view>
+	<view class="cu-form-group cc">
+		<view class="title">结束日期</view>
+		<picker  mode="date">
+			<view class="picker">
+				暂未设定
+			</view>
+		</picker>
+		
+	</view>
 	<view class="grid col-4 padding-sm" wx:if="{{cycle_index==1}}">
 	      <view wx:for="{{week}}" class="padding-xs" wx:key="{{index}}">
 	        <button class="cu-btn sm orange block {{item.checked?'bg-orange':'line-orange'}}" data-index="{{index}}" bindtap="ChooseCheckbox"> {{item.name}}
