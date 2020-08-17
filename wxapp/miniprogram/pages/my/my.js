@@ -30,16 +30,17 @@ Page({
 	// })
 	
 	
-	// console.log(res)
+  // console.log(res)
+   // wx.cloud.callFunction({
+        //   name:"sendMessage",
+        //   success:(res)=>{
+        //     console.log(res)
+        //   } 
+        // });
     wx.requestSubscribeMessage({
       tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
       success(res) {
-        wx.cloud.callFunction({
-          name:"sendMessage",
-          success:(res)=>{
-            console.log(res)
-          }
-        });
+       
 
       },
       fail(err) {
