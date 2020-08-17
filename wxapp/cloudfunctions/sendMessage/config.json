@@ -3,5 +3,12 @@
     "openapi": [
       "subscribeMessage.send"
     ]
-  }
+  },
+  "triggers": [
+    {
+      "name": "mySend",
+      "type": "timer",
+      "config": "* */1 * * * * *"
+    }
+  ]
 }

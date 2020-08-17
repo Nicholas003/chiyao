@@ -25,17 +25,20 @@
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
-  	"color": "#7A7E83",
-  	"selectedColor": "#3cc51f",
-  	"borderStyle": "black",
-  	"backgroundColor": "#ffffff",
-  	"list": [{
-  		"pagePath": "pages/home/home",
-  		"text": "首页"
-  	}, {
-  		"pagePath": "pages/my/my",
-  		"text": "我的"
-  	}]
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的"
+      }
+    ]
   },
   "sitemapLocation": "sitemap.json"
 }

@@ -3,8 +3,16 @@ import {
 	bus
 } from './common/bus/index.js';
 
+import {
+	cloud
+} from './common/cloud/index.js';
+
+import { formatTime } from './utils/util.js';
+
 App({
-	onLaunch: function () {
+	cloud,
+	formatTime,
+	onLaunch: async function () {
 		wx.cloud.init({
 			env: 'chiyao-ct0yu',
 			traceUser: true,
@@ -14,15 +22,22 @@ App({
 			env: 'chiyao-ct0yu'
 		});
 
-		wx.cloud.callFunction({
-			name: "Service",
-			success: (res) => {
-				console.log(res)
-			},
-			fail(err){
-				console.log(err)
-			}
-		});
+		let data = await cloud.call('login');
+
+		// console.log(formatTime(new Date()));
+
+		
+
+    console.log(data)
+		// wx.cloud.callFunction({
+		// 	name: "Service",
+		// 	success: (res) => {
+		// 		console.log(res)
+		// 	},
+		// 	fail(err){
+		// 		console.log(err)
+		// 	}
+		// });
 
 
 

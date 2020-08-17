@@ -13,17 +13,12 @@ Page({
   
 
   async ding() {
-    console.log(123)
-    wx.cloud.callFunction({
-			name: "login",
-			success: (res) => {
-				console.log(res)
-			},
-			fail(err){
-				console.log(err)
-			}
-		});
-	
+
+    
+    // console.log(123)
+    // let res = await wx.cloud.callFunction({name: "login"});
+
+    // console.log(res)
 	// this.setData({
 	// 	show_login_btn:true
 	// })
@@ -36,21 +31,21 @@ Page({
 	
 	
 	// console.log(res)
-    // wx.requestSubscribeMessage({
-    //   tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
-    //   success(res) {
-    //     wx.cloud.callFunction({
-    //       name:"sendMessage",
-    //       success:(res)=>{
-    //         console.log(res)
-    //       }
-    //     });
+    wx.requestSubscribeMessage({
+      tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
+      success(res) {
+        wx.cloud.callFunction({
+          name:"sendMessage",
+          success:(res)=>{
+            console.log(res)
+          }
+        });
 
-    //   },
-    //   fail(err) {
-    //     console.log(err)
-    //   }
-    // })
+      },
+      fail(err) {
+        console.log(err)
+      }
+    })
 
   },
   /**

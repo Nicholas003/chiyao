@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
 
 
   let send_res = {
-    touser:OPENID,
+    touser:'o_PkU0crNK1UbY4Vepn-iiP0DliY',
     page:"/pages/home/home",
     templateId: 'UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc',
     data:{

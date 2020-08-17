@@ -1,0 +1,52 @@
+// 云函数入口文件
+process.env.TZ = "Asia/Shanghai";
+
+const cloud = require('wx-server-sdk')
+
+cloud.init()
+
+const db = cloud.database();
+// 云函数入口函数
+
+function get_time(in_time){
+  let date = new Date();
+
+  let time = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${in_time}:00`;
+
+  return new Date(time).getTime();
+}
+
+exports.main = async (event, context) => {
+  const wxContext = cloud.getWXContext()
+  event.created_at = new Date().getTime();
+  let res = await db.collection('MedicationInfo').add({
+    data:event
+  });
+
+  for(let i=0;i<event.medication_time.length;i++){
+    event.medication_time[i] = get_time(event.medication_time[i]);
+  }
+
+  if(event.cycle==0){
+
+    for(let i=0;i<event.medication_time.length;i++){
+
+      let data = {
+        push_time:event.medication_time[i],                             //需要发送的时间
+        _openid:event.userInfo.openId,
+        medication_id:res._id,                                          //药物信息的id
+        is_push:new Date().getTime()>event.medication_time[i]?1:0,      //1已推送 0未推送 2推送失败  如果当前时间大于需要推送的时间表明已经过期 所以设置为已推送
+        confirm:0,                                                      //是否完成  0未完成  1已完成
+        created_at:new Date().getTime(),
+        updata_at:new Date().getTime(),
+      }
+      await db.collection('PublishQueue').add({data});
+    }
+    
+  }
+
+  
+
+
+  return res;
+}

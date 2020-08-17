@@ -1,4 +1,6 @@
 // miniprogram/pages/add/add.js
+import { formatTime } from '../../utils/util.js';
+let app = getApp();
 Page({
 
   /**
@@ -13,7 +15,7 @@ Page({
 			time:'12:30'
 		  },
 		  {
-		  	time:'--:--'
+		  	time:''
 		  }
 	  ],
 	  consumption:[
@@ -27,34 +29,49 @@ Page({
 	  week:[
 		  {
 			  'name':'星期一',
-			  'checked':false
+				'checked':false,
+				'key':0
 		  },
 		  {
 			  'name':'星期二',
-			  'checked':false
+				'checked':false,
+				'key':1
 		  },
 		  {
 			  'name':'星期三',
-			  'checked':false
+				'checked':false,
+				'key':2
 		  },
 		  {
 			  'name':'星期四',
-			  'checked':false
+				'checked':false,
+				'key':3
 		  },
 		  {
 			  'name':'星期五',
-			  'checked':false
+				'checked':false,
+				'key':4
 		  },
 		  {
 			  'name':'星期六',
-			  'checked':false
+				'checked':false,
+				'key':5
 		  },
 		  {
 			  'name':'星期日',
-			  'checked':false
+				'checked':false,
+				'key':6
 		  }
-	  ]
-  },
+		],
+		end_time:''
+	},
+	input({currentTarget:{dataset:{name}},detail:{value}}){
+		
+		this.setData({
+			[name]:value
+		})
+
+	},
   TimeChange({currentTarget:{dataset:{index}},detail:{value}}){
 	  
 	  console.log(index,value)
@@ -64,7 +81,13 @@ Page({
 		  [key]:value
 	  })
 	  
-  },
+	},
+	end_time_change({detail:{value:end_time}}){
+		// console.log(value)
+		this.setData({
+			end_time
+		})
+	},
   move_time({currentTarget:{dataset:{index}}}){
 	  console.log(index);
 	  let {eat_time} = this.data;
@@ -103,7 +126,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-	  
+		console.log(app.formatTime(new Date()));
+		
+		this.setData({
+			start:app.formatTime(new Date()).split(' ')[0]
+		});
+
+ 
 	  let one = [];
 	  
 	  let two = [];
@@ -135,7 +164,46 @@ Page({
 	  this.setData({
 		  cycle_index:value
 	  })
-  },
+	},
+	async save(){
+
+		console.log(new Date().getTime())
+
+		let {name,eat_time,consumption,consumption_index,cycle_index,end_time,week} = this.data;
+
+		let medication_time = [];
+		// {{consumption[0][consumption_index[0]]}}{{consumption[1][consumption_index[1]]}}{{consumption[2][consumption_index[2]]}}
+		
+		let cons =!consumption_index[0]&&!consumption_index[1]?0:`${consumption[0][consumption_index[0]]}${consumption[1][consumption_index[1]]}${consumption[2][consumption_index[2]]}`; //用量
+
+		let cycle = cycle_index;   //重复周期 0代表每天重复  1代表每周某几天重复
+
+		let repeat_week = [];  //每周哪几天重复
+
+		eat_time.forEach(item=>{
+			if(item.time){
+				medication_time.push(item.time)
+			}
+		});
+
+		if(cycle==1){
+			week.forEach(value=>{
+				if(value.checked){
+					repeat_week.push(value.key)
+				}
+			})
+		}
+		
+		console.log(name,medication_time,cons,end_time,cycle,repeat_week);
+		let from_data = {
+			name,medication_time,cons,end_time,cycle,repeat_week
+		}
+		console.log(from_data)
+		let res = await app.cloud.call('saveMedicationInfo',from_data);
+
+		console.log(res)
+
+	},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
