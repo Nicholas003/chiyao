@@ -1,3 +1,5 @@
+// const { send } = require("process");
+
 // miniprogram/pages/my/my.js
 let app = getApp();
 
@@ -10,8 +12,12 @@ Page({
 	  show_login_btn:false
   },
   
-  
+  async send(){
 
+    let res = await app.cloud.call('sendMessage');
+
+    console.log(res) 
+  },
   async ding() {
 
     
@@ -37,10 +43,23 @@ Page({
         //     console.log(res)
         //   } 
         // });
+    console.log(app);
+    const _ = app.db.command;
     wx.requestSubscribeMessage({
       tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
       success(res) {
-       
+        console.log(res)
+       for(let key in res){
+         if(res[key] == 'accept'){
+          app.db.collection('Member').doc(app.id).update({
+            data: {
+              medication_reminder:_.inc(1)
+            }
+          })
+
+
+         }
+       }
 
       },
       fail(err) {

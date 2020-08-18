@@ -23,7 +23,7 @@ App({
 		});
 
 		let data = await cloud.call('login');
-
+		this.id = data.id;
 		// console.log(formatTime(new Date()));
 
 		
