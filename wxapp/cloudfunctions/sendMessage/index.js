@@ -53,57 +53,45 @@ exports.main = async (event, context) => {
 		push_time: _.lte(new Date().getTime()),
 		is_push: 0
 	});
-	let {
-		data
-	} = await sql.get();
+	let {data} = await sql.get();
 
-	let res = await sql.update({
-		data: {
-			is_push: 1
-		}
-	});
+	let res = await sql.update({data: {is_push: 1}});  //把查到的数据都改成 1 正在发送
 
 	for (let i = 0; i < data.length; i++) {
 
-		let {
-			_openid: openid,
-			medication_id,
-			push_time,
-			_id
-		} = data[i];
+		let {_openid: openid,medication_id,push_time,_id} = data[i];
 
-		let {
-			data: {
-				name
+		let {data:[{medication_reminder}]} = await db.collection('Member').where({_openid: openid}).get();
+		
+		let state = 3; //0未推送 1在推送队列中 2已推送 3推送失败 4因为推送次数不够所以没推送 如果当前时间大于需要推送的时间表明已经过期 所以设置为已推送
+
+		if(medication_reminder>0){  //如果订阅次数大于等于0
+
+			let {data: {name}} = await db.collection('MedicationInfo').doc(medication_id).get();
+			
+			try {
+	
+				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: getTime(push_time)}));
+	
+				db.collection('Member').where({_openid: openid}).update({data: {medication_reminder:_.inc(-1)}});
+	
+				state = 2;
+	
+			} catch (error) {
+	
+				state = 3;
+	
 			}
-		} = await db.collection('MedicationInfo').doc(medication_id).get();
-
-		let state = 3; //0未推送 1再推送队列中 2已推送 3推送失败  如果当前时间大于需要推送的时间表明已经过期 所以设置为已推送
-
-		try {
-
-			let send_res = await cloud.openapi.subscribeMessage.send(make_json({
-				openid,
-				name,
-				time: getTime(push_time)
-			}));
-
-			// return send_res;
-
-			state = 2;
-
-		} catch (error) {
-
-			state = 3;
-
+		}else{
+			state = 4;
 		}
 
-		await db.collection('PublishQueue').doc(_id).update({
 
+
+		await db.collection('PublishQueue').doc(_id).update({
 			data: {
 				is_push: state
 			},
-
 		})
 		// return make_json({openid,name,time:getTime(push_time)});
 	}

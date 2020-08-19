@@ -1,10 +1,22 @@
 
 
 
+<view class="flex justify-center margin-top ">
+	<view class="cu-avatar xl round {{user.medication_reminder<10?'bg-red':user.medication_reminder<30?'bg-yellow':'bg-green'}}" style="transition: all .3s;">
+		<text class=" text-xxl ">{{user.medication_reminder}}</text>
+	</view>
+</view>
+
+
 <loginBtn show="{{show_login_btn}}"></loginBtn>
 <view class="padding flex flex-direction margin-top-xl">
-	<button class="cu-btn bg-green lg" bind:tap="ding">订阅消息</button>
+	<button class="cu-btn bg-green lg" bind:tap="ding">增加推送次数</button>
 </view>
+
 <view class="padding flex flex-direction margin-top-xl">
 	<button class="cu-btn bg-green lg" bind:tap="send">发送消息</button>
+</view>
+
+<view class="padding flex flex-direction margin-top-xl">
+	<button class="cu-btn bg-green lg" bind:tap="task">获取</button>
 </view>

@@ -5,122 +5,123 @@ let app = getApp();
 
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-	  show_login_btn:false
-  },
-  
-  async send(){
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		show_login_btn: false,
+		user: {}
+	},
 
-    let res = await app.cloud.call('sendMessage');
+	async send() {
 
-    console.log(res) 
-  },
-  async ding() {
+		let res = await app.cloud.call('sendMessage');
 
-    
-    // console.log(123)
-    // let res = await wx.cloud.callFunction({name: "login"});
+		console.log(res)
+	},
+	async task(){
+		// let res = await app.db.collection('MedicationInfo').doc('d644cf8b5f3cbd5f0018a44e2637103f').get()
+		
+		
+		let res = await app.cloud.call('addTask');
+		
+		console.log(res)
+		
+	},
+	async ding() {
 
-    // console.log(res)
-	// this.setData({
-	// 	show_login_btn:true
-	// })
-	
-	// let res = await app.db.collection('Member').add({
-	// 	data:{
-	// 		subscriptions_total:123
-	// 	}
-	// })
-	
-	
-  // console.log(res)
-   // wx.cloud.callFunction({
-        //   name:"sendMessage",
-        //   success:(res)=>{
-        //     console.log(res)
-        //   } 
-        // });
-    console.log(app);
-    const _ = app.db.command;
-    wx.requestSubscribeMessage({
-      tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
-      success(res) {
-        console.log(res)
-       for(let key in res){
-         if(res[key] == 'accept'){
-          app.db.collection('Member').doc(app.id).update({
-            data: {
-              medication_reminder:_.inc(1)
-            }
-          })
+		const _ = app.db.command;
+		
+		wx.requestSubscribeMessage({
+			tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
+			success:async (res)=>{
+				console.log(res)
+				for (let key in res) {
+					if (res[key] == 'accept') {
+						let res = await app.db.collection('Member').doc(app.id).update({
+							data: {
+								medication_reminder: _.inc(1)
+							}
+						});
+						console.log(res)
+						if (res.errMsg == "document.update:ok") {
+							this.data.user.medication_reminder++
+							this.setData({
+								user: this.data.user
+							})
+						}
+					}
+				}
 
+			},
+			fail(err) {
+				console.log(err)
+			}
+		})
 
-         }
-       }
+	},
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: async function(options) {
 
-      },
-      fail(err) {
-        console.log(err)
-      }
-    })
+		let {
+			data
+		} = await app.db.collection('Member').doc(app.id).get();
 
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+		console.log(data);
 
-  },
+		this.setData({
+			user: data
+		})
+	},
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function() {
 
-  },
+	},
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function() {
 
-  },
+	},
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function() {
 
-  },
+	},
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function() {
 
-  },
+	},
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function() {
 
-  },
+	},
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function() {
 
-  },
+	},
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function() {
 
-  }
+	}
 })
