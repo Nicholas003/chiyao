@@ -30,37 +30,37 @@ Page({
 		  {
 			  'name':'星期一',
 				'checked':false,
-				'key':0
+				'key':2
 		  },
 		  {
 			  'name':'星期二',
 				'checked':false,
-				'key':1
+				'key':3
 		  },
 		  {
 			  'name':'星期三',
 				'checked':false,
-				'key':2
+				'key':3
 		  },
 		  {
 			  'name':'星期四',
 				'checked':false,
-				'key':3
+				'key':4
 		  },
 		  {
 			  'name':'星期五',
 				'checked':false,
-				'key':4
+				'key':5
 		  },
 		  {
 			  'name':'星期六',
 				'checked':false,
-				'key':5
+				'key':6
 		  },
 		  {
 			  'name':'星期日',
 				'checked':false,
-				'key':6
+				'key':0
 		  }
 		],
 		end_time:''

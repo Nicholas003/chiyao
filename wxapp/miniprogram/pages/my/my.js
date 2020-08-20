@@ -33,7 +33,7 @@ Page({
 		const _ = app.db.command;
 		
 		wx.requestSubscribeMessage({
-			tmplIds: ['UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc'],
+			tmplIds: ['K3LYRKFI0iNd3dnq8w0Matt3HgKJFemtOuzAF0d4dS8'],
 			success:async (res)=>{
 				console.log(res)
 				for (let key in res) {

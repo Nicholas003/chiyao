@@ -10,12 +10,13 @@ const _ = db.command;
 function make_json({
 	openid,
 	name,
-	time
+	time,
+	cons
 }) {
 	let send_res = {
 		touser: openid,
 		page: "/pages/home/home",
-		templateId: 'UsFM7aGRTyt9QAnRaSIiWyH6exT1z58qvs9Om2cutRc',
+		templateId: 'K3LYRKFI0iNd3dnq8w0Matt3HgKJFemtOuzAF0d4dS8',
 		data: {
 			thing1: {
 				value: name
@@ -23,11 +24,8 @@ function make_json({
 			time2: {
 				value: time
 			},
-			thing3: {
-				value: 'TIT创意园'
-			},
-			thing6: {
-				value: '广州市新港中路397号'
+			thing4: {
+				value: cons?cons:'无'
 			}
 		}
 	};
@@ -55,7 +53,7 @@ exports.main = async (event, context) => {
 	});
 	let {data} = await sql.get();
 
-	let res = await sql.update({data: {is_push: 1}});  //把查到的数据都改成 1 正在发送
+	// let res = await sql.update({data: {is_push: 1}});  //把查到的数据都改成 1 正在发送
 
 	for (let i = 0; i < data.length; i++) {
 
@@ -67,20 +65,20 @@ exports.main = async (event, context) => {
 
 		if(medication_reminder>0){  //如果订阅次数大于等于0
 
-			let {data: {name}} = await db.collection('MedicationInfo').doc(medication_id).get();
+			let {data: {name,cons}} = await db.collection('MedicationInfo').doc(medication_id).get();
 			
 			try {
 	
-				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: getTime(push_time)}));
+				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: getTime(push_time),cons}));
 	
 				db.collection('Member').where({_openid: openid}).update({data: {medication_reminder:_.inc(-1)}});
 	
 				state = 2;
 	
 			} catch (error) {
-	
-				state = 3;
-	
+				console.log(error);
+				return error;
+				// state = 3;
 			}
 		}else{
 			state = 4;

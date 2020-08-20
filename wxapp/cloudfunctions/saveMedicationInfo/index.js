@@ -26,8 +26,8 @@ exports.main = async (event, context) => {
   for(let i=0;i<event.medication_time.length;i++){
     event.medication_time[i] = get_time(event.medication_time[i]);
   }
-
-  if(event.cycle==0){
+  
+  if(event.cycle==0||event.repeat_week.includes(new Date().getDay())){
 
     for(let i=0;i<event.medication_time.length;i++){
 
