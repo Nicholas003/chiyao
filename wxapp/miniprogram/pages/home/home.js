@@ -35,18 +35,36 @@ Page({
 	 */
 	onLoad: async function(options) {
 
+		this.load_sync();
+		
+	},
+	async load_sync(){
+		
+		clearInterval(this.intval)
+		
 		let {
 			data
 		} = await app.cloud.call('todaySchedule');
-
+		
 		console.log(data);
 		this.data.data = data;
-
-		setInterval(() => {
+		wx.stopPullDownRefresh()
+		this.intval = setInterval(() => {
 			this.set_list()
 		}, 1000)
+		
+	},
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function() {
+
+		this.load_sync()
+
 	},
 	set_list() {
+
+
 
 		let data = this.data.data;
 
@@ -85,14 +103,14 @@ Page({
 		});
 		let key = `list[${index}].confirm`;
 		this.setData({
-			show_index:null
+			show_index: null
 		});
-		setTimeout(()=>{
+		setTimeout(() => {
 			this.setData({
 				[key]: state,
 			})
-		},500)
-		
+		}, 500)
+
 		console.log(res)
 	},
 	/**
@@ -123,12 +141,6 @@ Page({
 
 	},
 
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function() {
-
-	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
