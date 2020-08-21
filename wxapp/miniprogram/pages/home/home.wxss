@@ -12,3 +12,7 @@
 	transition: all .3s;
 	max-height: 100rpx;
 }
+
+.del{
+	text-decoration:line-through
+}

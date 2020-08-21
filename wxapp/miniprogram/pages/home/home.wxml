@@ -1,37 +1,51 @@
-<view class="padding-lr padding-tb-xs solid margin-sm shadow bg-white" bind:tap="action" data-index="{{index}}" wx:key
- wx:for="{{10}}" style="border-radius: 10rpx;">
+<view class="padding-lr padding-tb-xs solid margin-sm shadow {{item.confirm==2?'bg-gray':'bg-white'}}" bind:tap="action" data-index="{{index}}" wx:key
+ wx:for="{{list}}" style="border-radius: 10rpx;">
 	<view class="flex justify-between align-center">
 		<view>
 			<view class="flex align-center">
-				<view class="padding-xs solid text-xl bg-blue" style="border-radius: 5rpx;font-weight: bold;">
-					08:00
+				<view class="padding-xs solid text-xl bg-blue {{item.confirm==2?'del':''}}" style="border-radius: 5rpx;font-weight: bold;">
+					{{item.show_time}}
 				</view>
-				<view class="margin-left text-bold text-xl">
-					阿莫西林
+				<view class="margin-left text-bold text-xl {{item.confirm==2?'del':''}}">
+					{{item.name}}
 				</view>
 			</view>
-			<view class="flex margin-top-sm">
+			<view class="flex margin-top-sm {{item.confirm==2?'del':''}}">
 				<view class="text-lg">
-					剂量：1片
+					剂量：{{item.cons?item.cons:'无'}}
 				</view>
-				<view class="text-lg margin-left-xl">
+				<!-- <view class="text-lg margin-left-xl">
 					提醒给：自己
-				</view>
+				</view> -->
 			</view>
 		</view>
 		<view class="">
-			<view class="margin-left text-bold">
+			<view wx:if="{{item.confirm==0}}" class="margin-left text-bold">
 				<view class="margin-tb-sm text-center">
-					<!-- <view>
-						<text class="cuIcon-check"></text>
-						已完成
-					</view> -->
 					<view>
 						<view>
-							超时
+							{{item.overtime?'超时':'还有'}}
 						</view>
+						<view> 
+							{{item.distance_time[0]}}小时{{item.distance_time[1]}}分{{item.distance_time[2]}}秒
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{item.confirm==1}}" class="margin-left text-bold">
+				<view class="margin-tb-sm text-center">
+					<view>
 						<view>
-							6时52分
+							已完成
+						</view>
+					</view>
+				</view>
+			</view>
+			<view wx:if="{{item.confirm==2}}" class="margin-left text-bold">
+				<view class="margin-tb-sm text-center">
+					<view>
+						<view>
+							已忽略
 						</view>
 					</view>
 				</view>
@@ -39,14 +53,18 @@
 		</view>
 	</view>
 	<view class="two-btn {{index==show_index?'action':''}}">
-		<view class="margin-top flex justify-between">
-			<view class="cu-btn round " catchtap>
+		<view class="margin-top flex justify-between" wx:if="{{item.confirm==0}}">
+			<button class="cu-btn round " data-index="{{index}}" data-state="2" data-id="{{item._id}}" catchtap="complete">
 				忽略
-			</view>
-			<!-- <button class="cu-btn round bg-green sm">完成</button> -->
-			<view class="cu-btn round bg-green" catchtap>
+			</button>
+			<button class="cu-btn round bg-green" data-index="{{index}}" data-state="1" data-id="{{item._id}}" catchtap="complete">
 				完成
-			</view>
+			</button>
+		</view> 
+		<view class="margin-top flex justify-center" wx:else>
+			<button class="cu-btn round " data-index="{{index}}" data-state="0" data-id="{{item._id}}" catchtap="complete">
+				点错了
+			</button>
 		</view>
 	</view>
 </view>

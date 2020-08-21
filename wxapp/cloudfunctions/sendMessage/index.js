@@ -77,8 +77,8 @@ exports.main = async (event, context) => {
 	
 			} catch (error) {
 				console.log(error);
-				return error;
-				// state = 3;
+				// return error;
+				state = 3;
 			}
 		}else{
 			state = 4;
@@ -88,7 +88,8 @@ exports.main = async (event, context) => {
 
 		await db.collection('PublishQueue').doc(_id).update({
 			data: {
-				is_push: state
+				is_push: state,
+				complete_time:state==2?Math.round(new Date().setHours(0,0,0,0)):''
 			},
 		})
 		// return make_json({openid,name,time:getTime(push_time)});

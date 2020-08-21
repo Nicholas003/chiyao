@@ -43,6 +43,8 @@ exports.main = async (event, context) => {
         push_time:get_time(medication_time[e]),                             //需要发送的时间
         _openid:data[i].userInfo.openId,
         medication_id:data[i]._id,                                          //药物信息的id
+        name:data[i].name,
+        cons:data[i].cons||'',
         is_push:0,      //0未推送 1再推送队列中 2已推送 3推送失败  如果当前时间大于需要推送的时间表明已经过期 所以设置为已推送
         confirm:0,                                                      //是否完成  0未完成  1已完成
         created_at:new Date().getTime(),
