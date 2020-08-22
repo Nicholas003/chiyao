@@ -26,8 +26,11 @@
 						<view>
 							{{item.overtime?'超时':'还有'}}
 						</view>
-						<view> 
-							{{item.distance_time[0]}}小时{{item.distance_time[1]}}分{{item.distance_time[2]}}秒
+						<view>
+						<text wx:if="{{item.distance_time[0]}}">{{item.distance_time[0]}}小时</text>
+						<text>{{item.distance_time[1]}}分</text>
+						<text wx:if="{{!item.distance_time[0]}}">{{item.distance_time[2]}}秒</text>
+							
 						</view>
 					</view>
 				</view>

@@ -1,0 +1,21 @@
+<view class="cu-list menu">
+
+	<view class="cu-item" wx:for="{{data}}" >
+		<view class="content padding-tb-sm">
+			<view>
+				<text class="cuIcon-clothesfill text-blue margin-right-xs"></text>{{item.name}}
+			</view>
+			<view class="text-gray text-sm">
+				<text class="cuIcon-infofill margin-right-xs"></text>小目标还没有实现！
+			</view>
+		</view>
+		<view class="action">
+			<switch class="switch-sex">
+				<view class="switch-wrapper">
+					<view class="switch-input" style="background-color: rgb(223, 223, 223); border-color: rgb(223, 223, 223);"></view>
+					<view class="uni-checkbox-input" style="color: rgb(0, 122, 255); display: none;"></view>
+				</view>
+			</switch>
+		</view>
+	</view>
+</view>

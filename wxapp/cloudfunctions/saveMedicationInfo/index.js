@@ -19,6 +19,12 @@ function get_time(in_time){
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   event.created_at = new Date().getTime();
+  event.on = 1;   //1表示打开
+
+  event.end_time = event.end_time?new Date(event.end_time).getTime():new Date().getTime()+60 * 60 * 1000 * 24 * 30;
+
+  //没有结束时间则设置为30天
+  
   let res = await db.collection('MedicationInfo').add({
     data:event
   });

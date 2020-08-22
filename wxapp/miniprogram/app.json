@@ -15,7 +15,8 @@
     "pages/im/im",
     "pages/im/room/room",
     "pages/add/add",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/remind/remind"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -32,12 +33,16 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "首页"
+        "text": "今日提醒"
       },
-	  {
-	    "pagePath": "pages/add/add",
-	    "text": "添加"
-	  },
+      {
+        "pagePath": "pages/remind/remind",
+        "text": "全部提醒"
+      },
+      {
+        "pagePath": "pages/add/add",
+        "text": "添加"
+      },
       {
         "pagePath": "pages/my/my",
         "text": "我的"
