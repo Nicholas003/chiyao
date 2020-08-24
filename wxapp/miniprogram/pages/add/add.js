@@ -30,12 +30,12 @@ Page({
 		  {
 			  'name':'星期一',
 				'checked':false,
-				'key':2
+				'key':1
 		  },
 		  {
 			  'name':'星期二',
 				'checked':false,
-				'key':3
+				'key':2
 		  },
 		  {
 			  'name':'星期三',
@@ -129,7 +129,8 @@ Page({
 		console.log(app.formatTime(new Date()));
 		
 		this.setData({
-			start:app.formatTime(new Date()).split(' ')[0]
+			start:app.formatTime(new Date()).split(' ')[0],
+			end:app.formatTime(new Date(new Date().getTime()+60 * 60 * 1000 * 24 * 30)).split(' ')[0]
 		});
 
  
@@ -170,9 +171,16 @@ Page({
 		console.log(new Date().getTime())
 
 		let {name,eat_time,consumption,consumption_index,cycle_index,end_time,week} = this.data;
+		
+		if(!name){
+			wx.showToast({
+				title:'请输入名称',
+				icon:'none'
+			})
+			return;
+		}
 
 		let medication_time = [];
-		// {{consumption[0][consumption_index[0]]}}{{consumption[1][consumption_index[1]]}}{{consumption[2][consumption_index[2]]}}
 		
 		let cons =!consumption_index[0]&&!consumption_index[1]?0:`${consumption[0][consumption_index[0]]}${consumption[1][consumption_index[1]]}${consumption[2][consumption_index[2]]}`; //用量
 
@@ -191,7 +199,14 @@ Page({
 				if(value.checked){
 					repeat_week.push(value.key)
 				}
-			})
+			});
+			if(repeat_week.length<1){
+				wx.showToast({
+					title:'至少选择一天',
+					icon:'none'
+				});
+				return
+			}
 		}
 		
 		console.log(name,medication_time,cons,end_time,cycle,repeat_week);
@@ -199,10 +214,15 @@ Page({
 			name,medication_time,cons,end_time,cycle,repeat_week
 		}
 		console.log(from_data)
+		wx.showLoading({
+			title:'保存中'
+		})
 		let res = await app.cloud.call('saveMedicationInfo',from_data);
-
-		console.log(res)
-
+		wx.hideLoading()
+		console.log(res);
+		app.bus.$emit('remind_refresh',{});
+		app.bus.$emit('home_refresh',{});
+		wx.navigateBack()
 	},
   /**
    * 生命周期函数--监听页面初次渲染完成

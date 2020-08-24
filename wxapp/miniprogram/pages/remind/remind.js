@@ -6,13 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    week:app.week
+    week:app.week,
+	show_loading:true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    this.async_onload();
+    app.bus.$on('remind_refresh',()=>{
+      console.log('触发remind_refresh')
+      this.async_onload();
+    })
+  },
+  async async_onload(){
     let {data} = await app.cloud.call('getRemind');
 
     for(let i=0;i<data.length;i++){
@@ -22,6 +30,7 @@ Page({
     }
 
     this.setData({
+		show_loading:false,
       data
     });
     wx.stopPullDownRefresh();
@@ -36,7 +45,31 @@ Page({
     });
     console.log(res)
   },
-
+  async del({currentTarget:{dataset:{id}}}){
+    wx.showActionSheet({
+      itemList: ['删除此项'],
+      itemColor:"#FF0000",
+      success:async ()=>{
+        wx.showLoading({
+          title: '正在删除',
+        });
+        let {state} = await app.cloud.call('delMP',{id});
+        wx.hideLoading()
+        if(state){
+          app.bus.$emit('remind_refresh',{});
+		      app.bus.$emit('home_refresh',{});
+        }else{
+          wx.showToast({
+            icon:"none",
+            title: '删除失败',
+          })
+        }
+      },
+      fail (res) {
+        console.log(res.errMsg)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

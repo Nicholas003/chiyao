@@ -65,17 +65,23 @@ Page({
 	 */
 	onLoad: async function(options) {
 
+		if(app.user._id){
+			this.get_user();
+		}
+		
+		app.bus.$on('up_user',this.get_user);
+	},
+	async get_user(){
 		let {
 			data
-		} = await app.db.collection('Member').doc(app.id).get();
-
+		} = await app.db.collection('Member').doc(app.user._id).get();
+		
 		console.log(data);
-
+		
 		this.setData({
 			user: data
 		})
 	},
-
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
@@ -87,7 +93,11 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function() {
-		this.onLoad()
+		
+		if(app.user._id){
+			this.get_user()
+		}
+		
 	},
 
 	/**

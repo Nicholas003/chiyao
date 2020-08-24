@@ -50,7 +50,7 @@
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">结束日期</view>
-		<picker  mode="date" bind:change="end_time_change" start="{{start}}">
+		<picker  mode="date" bind:change="end_time_change" start="{{start}}" end="{{end}}">
 			<view class="picker">
 				{{end_time==''?'暂未设定':end_time}}
 			</view>

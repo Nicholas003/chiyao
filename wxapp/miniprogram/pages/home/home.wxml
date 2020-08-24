@@ -1,3 +1,15 @@
+<view style="width:100vw;height:100vh;" wx:if="{{list.length<1}}" class="flex flex-direction justify-center align-center text-grey">
+	<view>
+		<text class="cuIcon-calendar" style="font-size: 250rpx;"></text>
+	</view>
+	<view>
+		今日暂无提醒
+	</view>
+	<view class="padding flex flex-direction">
+	  <navigator url="../add/add" class="cu-btn bg-green lg">立即创建</navigator>
+	</view>
+</view>
+<loading show="{{show_loading}}"></loading>
 <view class="padding-lr padding-tb-xs solid margin-sm shadow {{item.confirm==2?'bg-gray':'bg-white'}}" bind:tap="action" data-index="{{index}}" wx:key
  wx:for="{{list}}" style="border-radius: 10rpx;">
 	<view class="flex justify-between align-center">
@@ -39,7 +51,7 @@
 				<view class="margin-tb-sm text-center">
 					<view>
 						<view>
-							已完成
+							<text class="cuIcon-check text-green"></text> 已完成
 						</view>
 					</view>
 				</view>

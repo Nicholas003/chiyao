@@ -7,12 +7,14 @@ import {
 	cloud
 } from './common/cloud/index.js';
 
-import { formatTime } from './utils/util.js';
+import {
+	formatTime
+} from './utils/util.js';
 
 App({
 	cloud,
 	formatTime,
-	onLaunch: async function () {
+	onLaunch: async function() {
 		wx.cloud.init({
 			env: 'chiyao-ct0yu',
 			traceUser: true,
@@ -23,34 +25,31 @@ App({
 		});
 
 		let data = await cloud.call('login');
+		
 		this.id = data.id;
-		// console.log(formatTime(new Date()));
+		
+		console.log(data)
 
 		
-
-    console.log(data)
-		// wx.cloud.callFunction({
-		// 	name: "Service",
-		// 	success: (res) => {
-		// 		console.log(res)
-		// 	},
-		// 	fail(err){
-		// 		console.log(err)
-		// 	}
-		// });
-
-
-
-		bus.$on('up_user', this.up_user);
+		
+		this.up_user();
 	},
-	async up_user(e) {
+	async up_user() {
 
-		console.log(e)
-		let res = await this.db.collection('Member').doc('3adec2825f36409000b4bc8d3bf09a8e').get();
+		let res = await this.db.collection('Member').doc(this.id).get();
 
-		console.log(res)
+		this.user = res.data;
+		
+		if(res.data.medication_reminder<5){
+			wx.showTabBarRedDot({
+				index:2
+			});
+		}
+
+		bus.$emit('up_user',res.data);
 
 	},
+	user:{},
 	bus,
-	week:["周日","周一","周二","周三","周四","周五","周六"]
+	week: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"]
 })

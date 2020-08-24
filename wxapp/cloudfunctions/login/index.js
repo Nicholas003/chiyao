@@ -16,7 +16,9 @@ const db = cloud.database();
 exports.main = async (event, context) => {
 
   const wxContext = cloud.getWXContext();
-
+  
+  let medication_reminder = 0;
+  
   let member = await db.collection('Member').where({
     _openid: wxContext.OPENID
   }).get();
@@ -28,12 +30,13 @@ exports.main = async (event, context) => {
   if (has) {
 
     id = member.data[0]._id;
-
+	
+	medication_reminder = member.data[0].medication_reminder
   } else {
 
     let {_id} = await db.collection('Member').add({
       data: {
-        'medication_reminder': 0,
+        'medication_reminder': medication_reminder,
         'created_at': parseInt(new Date().getTime() / 1000),
         'last_login_at': parseInt(new Date().getTime() / 1000),
         '_openid':wxContext.OPENID
@@ -41,10 +44,11 @@ exports.main = async (event, context) => {
     });
 
     id = _id;
+	
   }
 
   return {
-    id
+    id,medication_reminder
   };
   // console.log(event)
   // console.log(context);

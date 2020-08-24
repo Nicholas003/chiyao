@@ -101,6 +101,13 @@
 					"id": -1,
 					"name": "pages/remind/remind",
 					"pathName": "pages/remind/remind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/remind/remind",
+					"pathName": "pages/remind/remind",
 					"scene": null
 				}
 			]

@@ -19,3 +19,8 @@ switch::after {
 	transform: scale(1, 1);
 	right: auto;
 }
+
+.item:active{
+  /* color: rgb(255, 0, 0); */
+  background: rgb(121, 120, 120) !important;
+}

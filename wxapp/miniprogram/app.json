@@ -40,12 +40,8 @@
         "text": "全部提醒"
       },
       {
-        "pagePath": "pages/add/add",
-        "text": "添加"
-      },
-      {
         "pagePath": "pages/my/my",
-        "text": "我的"
+        "text": "剩余提醒"
       }
     ]
   },

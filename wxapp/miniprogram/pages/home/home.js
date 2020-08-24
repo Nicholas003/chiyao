@@ -11,23 +11,26 @@ Page({
 	 */
 	data: {
 		show_index: null,
-		list: []
+		list: [],
+		show_loading:true
 	},
 
-	action({
-		currentTarget: {
-			dataset: {
-				index
-			}
-		}
-	}) {
-		// console.log(e)
+	action({currentTarget: {dataset: {index}}}) {
+
 		if (this.data.show_index == index) {
 			index = null
 		}
+		
 		this.setData({
 			show_index: index
-		})
+		});
+		
+		if(this.data.list.length-1==index){
+			wx.pageScrollTo({
+			  scrollTop: 10000,
+			  duration: 300
+			})
+		}
 	},
 
 	/**
@@ -37,20 +40,25 @@ Page({
 
 		this.load_sync();
 		
+		app.bus.$on('home_refresh',()=>{
+			this.load_sync();
+		})
+		
 	},
 	async load_sync(){
 		
 		clearInterval(this.intval)
 		
-		let {
-			data
-		} = await app.cloud.call('todaySchedule');
+		let {data} = await app.cloud.call('todaySchedule');
 		
-		console.log(data);
 		this.data.data = data;
+		
 		wx.stopPullDownRefresh()
+		
 		this.intval = setInterval(() => {
+			
 			this.set_list()
+			
 		}, 1000)
 		
 	},
@@ -63,8 +71,6 @@ Page({
 
 	},
 	set_list() {
-
-
 
 		let data = this.data.data;
 
@@ -83,35 +89,30 @@ Page({
 			data[i].show_time = show_time;
 
 		}
+		
 		this.setData({
-			list: data
+			
+			show_loading:false,
+			list: data,
+			
 		})
 	},
-	async complete({
-		currentTarget: {
-			dataset: {
-				id,
-				index,
-				state
-			}
-		}
-	}) {
-		let res = await app.db.collection('PublishQueue').doc(id).update({
-			data: {
-				confirm: state
-			}
-		});
+	async complete({currentTarget: {dataset: {id,index,state}}}) {
+		
+		let res = await app.db.collection('PublishQueue').doc(id).update({data: {confirm: state}});
+		
 		let key = `list[${index}].confirm`;
+		
 		this.setData({
 			show_index: null
 		});
+		
 		setTimeout(() => {
 			this.setData({
 				[key]: state,
 			})
 		}, 500)
 
-		console.log(res)
 	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
