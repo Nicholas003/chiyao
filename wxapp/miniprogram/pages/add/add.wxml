@@ -4,8 +4,8 @@
 	</view>
 	<view class="cu-form-group">
 		<view class="title">名称</view>
-		<input bind:input="input" data-name='name' placeholder="请输入药品名称或扫码"></input>
-		<text class="cuIcon-scan text-orange"></text>
+		<input bind:input="input" data-name='name' placeholder="请输入药品名称"></input>
+		<!-- <text class="cuIcon-scan text-orange"></text> -->
 	</view>
 	
 	<view class="cu-form-group" wx:for="{{eat_time}}">
