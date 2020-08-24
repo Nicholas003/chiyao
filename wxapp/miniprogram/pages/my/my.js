@@ -45,7 +45,12 @@ Page({
 						});
 						console.log(res)
 						if (res.errMsg == "document.update:ok") {
-							this.data.user.medication_reminder++
+							this.data.user.medication_reminder++;
+							if(this.data.user.medication_reminder>=10){
+								wx.hideTabBarRedDot({
+									index:2
+								})
+							}
 							this.setData({
 								user: this.data.user
 							})

@@ -57,7 +57,7 @@ Page({
         wx.hideLoading()
         if(state){
           app.bus.$emit('remind_refresh',{});
-		      app.bus.$emit('home_refresh',{});
+		  app.bus.$emit('home_refresh',{});
         }else{
           wx.showToast({
             icon:"none",

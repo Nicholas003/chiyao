@@ -26,10 +26,13 @@ Page({
 		});
 		
 		if(this.data.list.length-1==index){
-			wx.pageScrollTo({
-			  scrollTop: 10000,
-			  duration: 300
-			})
+			setTimeout(()=>{
+			  wx.pageScrollTo({
+				scrollTop: 10000,
+				duration: 300
+			  })
+			},400)
+			
 		}
 	},
 

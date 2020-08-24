@@ -40,7 +40,7 @@ App({
 
 		this.user = res.data;
 		
-		if(res.data.medication_reminder<5){
+		if(res.data.medication_reminder<10){
 			wx.showTabBarRedDot({
 				index:2
 			});

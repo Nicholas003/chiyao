@@ -6,10 +6,24 @@
 		</view>
 	</view>
 
-	<view class="padding flex flex-direction margin-top-xl">
+	<view class="padding flex flex-direction margin-top-df">
 		<button class="cu-btn bg-green lg" bind:tap="ding">增加推送次数</button>
 	</view>
+	<view class="margin text-center">
+		<view>
+			因小程序推送机制 需要用户手动订阅
+		</view>
+		<view>
+			点击增加即可增加一次推送
+		</view>
+		<view class="margin-top" wx:if="{{user.medication_reminder<10}}">
+			<view>当前可推送次数过低</view>
+			<view>请点击按钮增加推送次数</view>
+		</view>
+	</view>
+	
 </view>
+
 
 
 <!-- <view class="padding flex flex-direction margin-top-xl">
