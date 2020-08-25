@@ -1,26 +1,28 @@
-.cu-tag:nth-of-type(5n+1){
-  margin-left: 0;
+.cu-tag:nth-of-type(5n+1) {
+	margin-left: 0;
 }
-.cu-tag{
-  margin-top: 5rpx;
+
+.cu-tag {
+	margin-top: 5rpx;
 }
 
 switch::before {
 	content: "OFF";
-  right: 0;
-  font-size: 15rpx;
+	right: 0;
+	font-size: 15rpx;
 	transform: scale(1, 1);
 	left: auto;
 }
+
 switch::after {
 	content: "ON";
-  left: 0;
-  font-size: 15rpx;
+	left: 0;
+	font-size: 15rpx;
 	transform: scale(1, 1);
 	right: auto;
 }
 
-.item:active{
-  /* color: rgb(255, 0, 0); */
-  background: rgb(121, 120, 120) !important;
+.item:active {
+
+	background: rgb(194, 193, 193) !important;
 }

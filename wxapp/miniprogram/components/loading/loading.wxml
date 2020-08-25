@@ -1,0 +1,7 @@
+<view style="position: fixed;top: 0;bottom: 0;left: 0;right: 0;background-color: #ffffff;z-index: 10000;" class="mask {{show?'show':''}}">
+	<view style="width:100vw;height:100vh;" class="flex justify-center align-center text-grey ">
+		<view style="width: 20rpx;height: 70rpx;animation-delay:.{{index*1}}s;" wx:for="{{8}}" class="solid margin-left-xs load">
+			
+		</view>
+	</view>
+</view>

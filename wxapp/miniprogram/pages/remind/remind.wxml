@@ -13,8 +13,11 @@
 <view class="cu-list menu" wx:if="{{data.length>0}}">
 	<view class="item cu-item" wx:for="{{data}}" data-id="{{item._id}}" bind:longpress="del">
 		<view class="content padding-tb-sm">
-			<view>
-				{{item.name}}-结束日期{{item.end_time}}
+			<view class="text-xl" style="font-weight: bold;">
+				{{item.name}}
+			</view>
+			<view class="text-sm text-bold text-gray" >
+				结束日期：{{item.end_time}}
 			</view>
 			<view wx:if="{{item.cycle==0}}" class=" text-sm tag cu-tag line-blue">
 				每天

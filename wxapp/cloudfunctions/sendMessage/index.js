@@ -53,7 +53,7 @@ exports.main = async (event, context) => {
 	});
 	let {data} = await sql.get();
 
-	// let res = await sql.update({data: {is_push: 1}});  //把查到的数据都改成 1 正在发送
+	await sql.update({data: {is_push: 1}});  //把查到的数据都改成 1 正在发送
 
 	for (let i = 0; i < data.length; i++) {
 
@@ -61,7 +61,7 @@ exports.main = async (event, context) => {
 
 		let {data:[{medication_reminder}]} = await db.collection('Member').where({_openid: openid}).get();
 		
-		let state = 3; //0未推送 1在推送队列中 2已推送 3推送失败 4因为推送次数不够所以没推送 如果当前时间大于需要推送的时间表明已经过期 所以设置为已推送
+		let state = 3; //0未推送 1在推送队列中 2已推送 3推送失败 4因为推送次数不够所以没推送
 
 		if(medication_reminder>0){  //如果订阅次数大于等于0
 
@@ -71,32 +71,30 @@ exports.main = async (event, context) => {
 	
 				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: getTime(push_time),cons}));
 	
-				db.collection('Member').where({_openid: openid}).update({data: {medication_reminder:_.inc(-1)}});
+				db.collection('Member').where({_openid: openid}).update({data: {medication_reminder:_.inc(-1)}});  //订阅次数-1
 	
 				state = 2;
 	
 			} catch (error) {
 				console.log(error);
-				// return error;
+
 				state = 3;
 			}
 		}else{
 			state = 4;
 		}
 
-
-
-		await db.collection('PublishQueue').doc(_id).update({
+		//推送之后可以把修改状态  如果成功则加上推送事件
+		await db.collection('PublishQueue').doc(_id).update({ 
 			data: {
 				is_push: state,
 				complete_time:state==2?Math.round(new Date().setHours(0,0,0,0)):''
 			},
 		})
-		// return make_json({openid,name,time:getTime(push_time)});
+
 	}
 	return {
-		data,
-		// res
+		data
 	};
 
 

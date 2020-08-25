@@ -31,5 +31,5 @@
 </view>
 
 <view class="padding flex flex-direction margin-top-xl">
-	<button class="cu-btn bg-green lg" bind:tap="task">获取</button>
+	<button class="cu-btn bg-green lg" bind:tap="task">添加推送任务</button>
 </view> -->

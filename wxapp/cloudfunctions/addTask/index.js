@@ -26,23 +26,22 @@ function get_time(in_time) {
 // 云函数入口函数
 exports.main = async (event, context) => {
 
-  let {
-    data
-  } = await db.collection('MedicationInfo').where(_.or([{
-      cycle: 0 //获取每天都需要推送消息的的
-    },
-    {
-      repeat_week: new Date().getDay() // 或者发送的星期是今天的
-    }
-  ])).where({
-    on: true
-  }).get();
+  let {data} = await db.collection('MedicationInfo')
+  .where(
+    _.or([{
+        cycle: 0 //获取每天都需要推送消息的的
+      },
+      {
+        repeat_week: new Date().getDay() // 或者发送的星期是今天的
+      }]))
+      .where({
+        on: true
+      }).get();
 
   for (let i = 0; i < data.length; i++) {
-    let {
-      medication_time
-    } = data[i];
-    // return data;
+
+    let {medication_time} = data[i];
+
     for (let e = 0; e < medication_time.length; e++) {
       let add_data = {
         push_time: get_time(medication_time[e]), //需要发送的时间
@@ -58,7 +57,7 @@ exports.main = async (event, context) => {
       await db.collection('PublishQueue').add({
         data: add_data
       });
-      // return add_data;
+      
     }
   }
 }

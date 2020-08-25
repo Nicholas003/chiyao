@@ -1,0 +1,31 @@
+@import "../../common/colorui/main.wxss";
+
+@import "../../common/colorui/icon.wxss";
+@keyframes load-a{
+	from{
+		/* width: 100rpx; */
+		background: #e2e2e2;
+	}
+	to{
+		/* width: 10rpx; */
+		background: #b4b4b4;
+	}
+}
+
+.load{
+	/* background: #FF0000; */
+	animation: load-a .9s .0s ease-in-out infinite alternate;
+	
+}
+
+.mask{
+	pointer-events: none;
+	opacity: 0;
+	transition: all .3s;
+}
+
+.mask.show{
+	pointer-events: auto;
+	opacity: 1;
+	transition: all .3s;
+}
