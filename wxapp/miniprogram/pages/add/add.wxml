@@ -4,10 +4,10 @@
 	</view>
 	<view class="cu-form-group">
 		<view class="title">名称</view>
-		<input bind:input="input" data-name='name' placeholder="请输入药品名称"></input>
-		<!-- <text class="cuIcon-scan text-orange"></text> -->
+		<input bind:input="input" data-name='name' value="{{name}}" placeholder="请输入药品名称"></input>
+		<text class="cuIcon-scan text-orange"></text>
 	</view>
-	
+
 	<view class="cu-form-group" wx:for="{{eat_time}}">
 		<view class="title">第{{index+1}}次吃药时间</view>
 		<picker mode="time" value="{{time}}" start="{{eat_time[index-1].time}}" data-index="{{index}}" bindchange="TimeChange">
@@ -27,11 +27,11 @@
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">用量</view>
-		<picker  mode="multiSelector" value="{{consumption_index}}" range="{{consumption}}" bind:change="change_consumption">
+		<picker mode="multiSelector" value="{{consumption_index}}" range="{{consumption}}" bind:change="change_consumption">
 			<view class="picker">
 				<view class="text-gray" wx:if="{{!consumption_index[0]&&!consumption_index[1]}}">
 					未设置
-					
+
 				</view>
 				<view wx:else>
 					{{consumption[0][consumption_index[0]]}}{{consumption[1][consumption_index[1]]}}{{consumption[2][consumption_index[2]]}}
@@ -41,34 +41,34 @@
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">重复周期</view>
-		<picker  mode="selector"  value="{{cycle_index}}" bind:change="zq_change"  range="{{cycle}}">
+		<picker mode="selector" value="{{cycle_index}}" bind:change="zq_change" range="{{cycle}}">
 			<view class="picker">
 				{{cycle[cycle_index]}}
 			</view>
 		</picker>
-		
+
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">结束日期</view>
-		<picker  mode="date" bind:change="end_time_change" start="{{start}}" end="{{end}}">
+		<picker mode="date" bind:change="end_time_change" start="{{start}}" end="{{end}}">
 			<view class="picker">
 				{{end_time==''?'暂未设定':end_time}}
 			</view>
 		</picker>
-		
+
 	</view>
 	<view class="text-xs text-gray text-right padding-top">
 		*不设置结束日期则自动设置为30天结束
 	</view>
 	<view class="grid col-4 padding-sm" wx:if="{{cycle_index==1}}">
-	      <view wx:for="{{week}}" class="padding-xs" wx:key="{{index}}">
-	        <button class="cu-btn sm orange block {{item.checked?'bg-orange':'line-orange'}}" data-index="{{index}}" bindtap="ChooseCheckbox"> {{item.name}}
-	        </button>
-	      </view>
-	    </view>
-	<view class="padding flex flex-direction margin-top-xl">
-	  <button class="cu-btn bg-green lg" bind:tap="save">确定</button>
+		<view wx:for="{{week}}" class="padding-xs" wx:key="{{index}}">
+			<button class="cu-btn sm orange block {{item.checked?'bg-orange':'line-orange'}}" data-index="{{index}}" bindtap="ChooseCheckbox"> {{item.name}}
+			</button>
+		</view>
 	</view>
+	<view class="padding-lr flex flex-direction margin-top-xl">
+		<button class="cu-btn bg-green lg" bind:tap="save">确定</button>
+		<button class="cu-btn bg-green lg margin-top" bind:tap="created_qrcode">生成二维码</button>
+	</view>
+	<view class="text-xs text-gray text-right padding-tb">*让家人、朋友扫码后即可免输入使用提醒</view>
 </view>
-
-

@@ -108,6 +108,14 @@
 					"id": -1,
 					"name": "pages/remind/remind",
 					"pathName": "pages/remind/remind",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/add/addsdsadasd",
+					"pathName": "pages/add/add",
+					"query": "id=ac5f38825f4741cf007072013318601a",
 					"scene": null
 				}
 			]

@@ -40,11 +40,6 @@ App({
 
 		this.user = res.data;
 		
-		if(res.data.medication_reminder<10){
-			wx.showTabBarRedDot({
-				index:2
-			});
-		}
 
 		bus.$emit('up_user',res.data);
 
