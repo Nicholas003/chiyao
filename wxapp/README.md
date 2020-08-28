@@ -1,12 +1,24 @@
-# 云开发 quickstart
+# 吃药小助 云开发
 
-这是云开发的快速启动指引，其中演示了如何上手使用云开发的三大基础能力：
+##这里是小程序目录
 
-- 数据库：一个既可在小程序前端操作，也能在云函数中读写的 JSON 文档型数据库
-- 文件存储：在小程序前端直接上传/下载云端文件，在云开发控制台可视化管理
-- 云函数：在云端运行的代码，微信私有协议天然鉴权，开发者只需编写业务逻辑代码
+###小程序包含四个页面
+----
 
-## 参考文档
+[今日提醒](miniprogram/pages/home "去查看")  
 
-- [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
+展示今日需要通知的列表
+* * *
 
+[全部提醒](miniprogram/pages/remind "去查看")
+
+展示所有需要通知的药品
+* * *
+[增加提醒次数](miniprogram/pages/remind "去查看")
+
+有个按钮，点击就可以订阅一次推送
+* * *
+[添加药品](miniprogram/pages/add "去查看")
+
+用来添加药品 或者 生成药物用法二维码 分享给其他人
+* * *

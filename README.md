@@ -1,39 +1,81 @@
-# chiyao
+# 吃药小助
 
-#### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+腾讯云 云开发比赛
 
-#### 软件架构
-软件架构说明
+小程序可用来提醒用户吃药 避免忘记服用 或者 漏服
 
+保护自己的身体健康
 
-#### 安装教程
+小程序使用[ColorUI](https://github.com/weilanwl/ColorUI "去查看")  作为基础样式 感谢作者 晓港Plus⁺
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+##开始
+***
+下载代码 
 
-#### 使用说明
+导入到云开发的小程序中
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+把 [app.js](wxapp/miniprogram/app.js "去查看") 中env修改成自己的环境id
 
 
-#### 码云特技
+***
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5.  码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+####新建合集（所有合集均没有初始数据）（共四个）
+***
+PublishQueue
+
+合集用来存储推送队列
+
+***
+
+Member
+
+存储用户信息
+***
+MedicationInfo
+
+存储用户的药物信息 包括提醒时间 结束时间等
+***
+Drug
+
+用来存放二维码中的药物信息
+***
+
+
+####[页面信息](wxapp/miniprogram/)  （共4个页面） 
+----
+
+####[云函数列表](wxapp/cloudfunctions/)  （共8个函数） 
+
+#####（使用时请设置所有函数的环境变量 TZ设置为Asia/Shanghai 如不设置有8小时时差）
+
+-----
+
+[login](wxapp/cloudfunctions/login "去查看")  登录函数 存储用户信息
+
+***
+
+[saveMedicationInfo](wxapp/cloudfunctions/saveMedicationInfo "去查看")  保存药品信息 以及增加今日此药品推送队列   
+
+***
+
+[todaySchedule](wxapp/cloudfunctions/todaySchedule "去查看")  获取今日需要推送的列表
+
+***
+
+[delMP](wxapp/cloudfunctions/delMP "去查看")  删除药物信息的方法
+
+***
+
+[createdQrcode](wxapp/cloudfunctions/createdQrcode "去查看")  生成药物信息的小程序码
+
+***
+
+[getRemind](wxapp/cloudfunctions/getRemind "去查看") 获取我的药物信息
+
+***
+
+[addTask](wxapp/cloudfunctions/addTask "去查看") 每天零点添加全部明日需要提醒的信息   本函数需要上传触发器 定时任务每天零点执行
+
+***
+
+[sendMessage](wxapp/cloudfunctions/sendMessage "去查看") 每分钟执行 查看此时有无需要提醒的消息 
