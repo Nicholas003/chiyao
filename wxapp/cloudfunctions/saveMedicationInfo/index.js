@@ -22,6 +22,7 @@ exports.main = async (event, context) => {
   event.on = true;   //1表示打开
   event._openid = event.userInfo.openId;
   event.end_time = event.end_time?new Date(event.end_time).getTime():new Date().getTime()+60 * 60 * 1000 * 24 * 30;
+  // event.end_time = event.end_time?new Date(event.end_time).getTime():(Math.round(new Date().setHours(0,0,0,0)))+(60 * 60 * 1000 * 24 * 31)-1; //第三十天的最后一秒
 
   //没有结束时间则设置为30天
   

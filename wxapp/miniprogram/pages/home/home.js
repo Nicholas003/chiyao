@@ -62,7 +62,9 @@ Page({
 			
 			this.set_list()
 			
-		}, 1000)
+		}, 1000);
+		
+		// app.bus.$emit('set_medication_reminder',{totle:this.data.user.medication_reminder})
 		
 	},
 	/**

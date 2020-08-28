@@ -5,7 +5,7 @@
 	<view class="cu-form-group">
 		<view class="title">名称</view>
 		<input bind:input="input" data-name='name' value="{{name}}" placeholder="请输入药品名称"></input>
-		<text class="cuIcon-scan text-orange"></text>
+		<text class="cuIcon-scan text-orange" bind:tap="qrcode"></text>
 	</view>
 
 	<view class="cu-form-group" wx:for="{{eat_time}}">
@@ -50,7 +50,7 @@
 	</view>
 	<view class="cu-form-group cc">
 		<view class="title">结束日期</view>
-		<picker mode="date" bind:change="end_time_change" start="{{start}}" end="{{end}}">
+		<picker mode="date" bind:change="end_time_change" value="{{end_time}}" start="{{start}}" end="{{end}}">
 			<view class="picker">
 				{{end_time==''?'暂未设定':end_time}}
 			</view>

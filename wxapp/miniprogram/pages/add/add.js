@@ -65,6 +65,32 @@ Page({
 		],
 		end_time: ''
 	},
+	qrcode(){
+		wx.scanCode({
+		  success:(res)=>{
+			if(res.path){
+				try{
+					
+					let id = res.path.split('=')[1];
+					
+					this.qrcode_handle({id});
+					
+				}catch(e){
+					wx.showToast({
+						title:'扫码有误',
+						icon:'none'
+					})
+				}
+				
+			}else{
+				wx.showToast({
+					title:'扫码有误',
+					icon:'none'
+				})
+			}
+		  }
+		})
+	},
 	input({currentTarget: {dataset: {name}},detail: {value}}) {
 
 		this.setData({
@@ -127,6 +153,7 @@ Page({
 	},
 	async qrcode_handle({id}){
 		console.log(id)
+		
 
 		let {data:{consumption_index,cycle:cycle_index,medication_time,name,repeat_week,duration=0},data} = await app.db.collection('Drug').doc(id).get();
 
@@ -168,12 +195,15 @@ Page({
 	onLoad: function (e) {
 
 		console.log(e)
-		this.qrcode_handle(e)
+		if(e.id){
+			this.qrcode_handle(e)
+		}
+		
+		
 		this.setData({
 			start: app.formatTime(new Date()).split(' ')[0],
 			end: app.formatTime(new Date(new Date().getTime() + 60 * 60 * 1000 * 24 * 30)).split(' ')[0]
 		});
-
 
 		let one = [];
 

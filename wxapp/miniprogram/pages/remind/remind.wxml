@@ -10,6 +10,7 @@
 	</view>
 </view>
 <loading show="{{show_loading}}"></loading>
+<notice type="remind"></notice>
 <view class="cu-list menu" wx:if="{{data.length>0}}">
 	<view class="item cu-item" wx:for="{{data}}" data-id="{{item._id}}" bind:longpress="del">
 		<view class="content padding-tb-sm">

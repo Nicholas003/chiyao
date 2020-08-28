@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-  	  "loading":"../../components/loading/loading"
+  	  "loading":"../../components/loading/loading",
+	  "notice":"../../components/notice/notice"
   },
   "enablePullDownRefresh":true
 }

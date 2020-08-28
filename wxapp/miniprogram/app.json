@@ -1,36 +1,41 @@
 {
-  "pages": [
-    "pages/home/home",
-    "pages/add/add",
-    "pages/my/my",
-    "pages/remind/remind"
-  ],
-  "window": {
-    "backgroundColor": "#F6F6F6",
-    "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "小助手",
-    "navigationBarTextStyle": "black"
-  },
-  "tabBar": {
-    "color": "#7A7E83",
-    "selectedColor": "#3cc51f",
-    "borderStyle": "black",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/home/home",
-        "text": "今日提醒"
-      },
-      {
-        "pagePath": "pages/remind/remind",
-        "text": "全部提醒"
-      },
-      {
-        "pagePath": "pages/my/my",
-        "text": "剩余提醒"
-      }
-    ]
-  },
-  "sitemapLocation": "sitemap.json"
+	"pages": [
+		"pages/home/home",
+		"pages/add/add",
+		"pages/my/my",
+		"pages/remind/remind"
+	],
+	"window": {
+		"backgroundColor": "#F6F6F6",
+		"backgroundTextStyle": "light",
+		"navigationBarBackgroundColor": "#F6F6F6",
+		"navigationBarTitleText": "小助手",
+		"navigationBarTextStyle": "black"
+	},
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#39b54a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"iconPath": "./common/icon/0-0.png",
+				"selectedIconPath": "./common/icon/0-1.png",
+				"pagePath": "pages/home/home",
+				"text": "今日提醒"
+			},
+			{
+				"iconPath": "./common/icon/1-0.png",
+				"selectedIconPath": "./common/icon/1-1.png",
+				"pagePath": "pages/remind/remind",
+				"text": "全部提醒"
+			},
+			{
+				"iconPath": "./common/icon/2-0.png",
+				"selectedIconPath": "./common/icon/2-1.png",
+				"pagePath": "pages/my/my",
+				"text": "剩余提醒"
+			}
+		]
+	},
+	"sitemapLocation": "sitemap.json"
 }

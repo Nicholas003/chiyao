@@ -51,6 +51,7 @@ Page({
 									index:2
 								})
 							}
+							app.bus.$emit('set_medication_reminder',{total:this.data.user.medication_reminder})
 							this.setData({
 								user: this.data.user
 							})

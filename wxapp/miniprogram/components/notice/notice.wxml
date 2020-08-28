@@ -1,0 +1,9 @@
+
+<view wx:if="{{show}}" class="padding  solid {{type=='home'?'margin-sm':''}} shadow bg-white flex justify-between align-center" style="{{type=='home'?'border-radius: 10rpx;':''}}">
+	<view>
+		您的剩余推送次数过低，极有可能推送失败
+	</view>
+	<navigator open-type="switchTab" url="/pages/my/my" class="cu-btn round bg-green sm">
+		去增加
+	</navigator>
+</view>
