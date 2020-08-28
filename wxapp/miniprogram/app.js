@@ -11,19 +11,17 @@ import {
 	formatTime
 } from './utils/util.js';
 
+let env = 'chiyao-ct0yu';
+
 App({
 	cloud,
 	formatTime,
 	onLaunch: async function() {
 		console.warn = ()=>{}
-		wx.cloud.init({
-			env: 'chiyao-ct0yu',
-			traceUser: true,
-		});
 
-		this.db = wx.cloud.database({
-			env: 'chiyao-ct0yu'
-		});
+		wx.cloud.init({env: env,traceUser: true,});
+
+		this.db = wx.cloud.database({env: env});
 		
 		bus.$on('get_medication_reminder',(callBack)=>{
 
