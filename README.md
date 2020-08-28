@@ -8,13 +8,32 @@
 
 小程序使用[ColorUI](https://github.com/weilanwl/ColorUI "去查看")  作为基础样式 感谢作者 晓港Plus⁺
 
-##开始
+## 开始
 ***
 下载代码 
 
 导入到云开发的小程序中
 
 把 [app.js](wxapp/miniprogram/app.js "去查看") 中env修改成自己的环境id
+
+把页面中 [my.js](wxapp/miniprogram/pages/my/my.js "去查看") 中第36行的tmplIds修改为自己的模板ID
+
+把sendMessage云函数中 [index.js](wxapp/cloudfunctions/sendMessage/index.js "去查看") 中第19行的templateId修改为自己的模板id
+
+#### 模板要求：
+
+模板编号：9109
+
+类目：办公
+
+需要的字段： 日程、时间、备注
+
+日程 {{thing1.DATA}}
+
+时间 {{time2.DATA}}
+
+备注 {{thing4.DATA}}
+
 
 
 ***
