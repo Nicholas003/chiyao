@@ -42,7 +42,7 @@ Page({
 	onLoad: async function(options) {
 
 		this.load_sync();
-		
+		// console.log(formatTime(new Date(1598835123824)))
 		app.bus.$on('home_refresh',()=>{
 			this.load_sync();
 		})
