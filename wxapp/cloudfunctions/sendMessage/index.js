@@ -5,14 +5,24 @@ cloud.init()
 
 const db = cloud.database();
 const _ = db.command;
-// 云函数入口函数
 
-function make_json({
-	openid,
-	name,
-	time,
-	cons
-}) {
+const formatTime = date => {
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const minute = date.getMinutes()
+  const second = date.getSeconds()
+
+  return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
+}
+
+const formatNumber = n => {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+function make_json({openid,name,time,cons}) {
 	let send_res = {
 		touser: openid,
 		page: "/pages/home/home",
@@ -33,17 +43,6 @@ function make_json({
 	return send_res;
 }
 
-function getTime(nS) {
-	var date = new Date(parseInt(nS));
-	var year = date.getFullYear();
-	var mon = date.getMonth() + 1;
-	var day = date.getDate();
-	var hours = date.getHours();
-	var minu = date.getMinutes();
-	var sec = date.getSeconds();
-
-	return year + '年' + mon + '月' + day + '日' + ' ' + hours + ':' + minu;
-}
 
 exports.main = async (event, context) => {
 
@@ -69,7 +68,7 @@ exports.main = async (event, context) => {
 			
 			try {
 	
-				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: getTime(push_time),cons}));
+				let send_res = await cloud.openapi.subscribeMessage.send(make_json({openid,name,time: formatTime(new Date(push_time)),cons}));
 	
 				db.collection('Member').where({_openid: openid}).update({data: {medication_reminder:_.inc(-1)}});  //订阅次数-1
 	
