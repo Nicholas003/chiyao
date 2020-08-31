@@ -10,7 +10,7 @@
 	</view>
 </view>
 <loading show="{{show_loading}}"></loading>
-<notice type="home"></notice>
+<notice type="home" wx:if="{{list.length>0}}"></notice>
 <view id="item-{{index}}" class="padding-lr padding-tb-xs solid margin-sm shadow {{item.confirm==2?'bg-gray':'bg-white'}}" bind:tap="action" data-index="{{index}}" wx:key
  wx:for="{{list}}" style="border-radius: 10rpx;">
 	<view class="flex justify-between align-center">

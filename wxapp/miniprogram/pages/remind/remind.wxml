@@ -6,18 +6,18 @@
 		暂无提醒
 	</view>
 	<view class="padding flex flex-direction">
-	  <navigator url="../add/add" class="cu-btn bg-green lg">立即创建</navigator>
+		<navigator url="../add/add" class="cu-btn bg-green lg">立即创建</navigator>
 	</view>
 </view>
 <loading show="{{show_loading}}"></loading>
-<notice type="remind"></notice>
+<notice type="remind" wx:if="{{data.length>0}}"></notice>
 <view class="cu-list menu" wx:if="{{data.length>0}}">
 	<view class="item cu-item" wx:for="{{data}}" data-id="{{item._id}}" bind:longpress="del">
 		<view class="content padding-tb-sm">
 			<view class="text-xl" style="font-weight: bold;">
 				{{item.name}}
 			</view>
-			<view class="text-sm text-bold text-gray" >
+			<view class="text-sm text-bold text-gray">
 				结束日期：{{item.end_time}}
 			</view>
 			<view wx:if="{{item.cycle==0}}" class=" text-sm tag cu-tag line-blue">
@@ -33,10 +33,11 @@
 			<switch checked="{{item.on}}" data-id="{{item._id}}" bind:change="on_change"></switch>
 		</view>
 	</view>
+	<view class="text-xs text-gray text-right padding-top padding-right">
+		*设置知否开启提醒，次日生效不会影响当天提醒
+	</view>
 </view>
-<view class="text-xs text-gray text-right padding-top padding-right">
-	*设置知否开启提醒，次日生效不会影响当天提醒
-</view>
+
 
 <navigator wx:if="{{data.length>0}}" url="../add/add" class="cu-btn icon bg-green lg" style="width:100rpx;height:100rpx;position:fixed;left:30rpx;bottom:30rpx">
 	<text class="cuIcon-add text-xsl"></text>
