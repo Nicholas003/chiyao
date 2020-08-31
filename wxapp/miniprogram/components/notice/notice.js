@@ -5,6 +5,9 @@ Component({
 	/**
 	 * 组件的属性列表
 	 */
+	options: {
+    addGlobalClass: true,
+  },
 	properties: {
 		type: {
 			type: String,
@@ -37,17 +40,9 @@ Component({
 	 */
 	methods: {
 		total_handler({total=0}){
-			console.log('组件',total)
 			let show = true;
 			if(total>9){
 				show = false;
-				// wx.hideTabBarRedDot({
-				// 	index:2
-				// })
-			}else{
-				// wx.showTabBarRedDot({
-				// 	index:2
-				// })
 			}
 			this.setData({
 				show

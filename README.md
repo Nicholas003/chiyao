@@ -93,8 +93,8 @@ Drug
 
 ***
 
-[addTask](wxapp/cloudfunctions/addTask "去查看") 每天零点添加全部明日需要提醒的信息   本函数需要上传触发器 定时任务每天零点执行
+[addTask](wxapp/cloudfunctions/addTask "去查看") 每天零点添加全部明日需要提醒的信息   本函数需要上传触发器
 
 ***
 
-[sendMessage](wxapp/cloudfunctions/sendMessage "去查看") 每分钟执行 查看此时有无需要提醒的消息  本函数需要上传触发器 定时任务每天零点执行
+[sendMessage](wxapp/cloudfunctions/sendMessage "去查看") 每分钟执行 查看此时有无需要提醒的消息  本函数需要上传触发器

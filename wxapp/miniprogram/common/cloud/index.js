@@ -70,13 +70,6 @@ class cloud{
 
     return this.promise;
     
-    // this.interceptor = {
-    //   request:that.request,
-    //   response:that.response
-    // }
-    
-    // let res = await wx.cloud.callFunction({name: "login"});
-
 
     
 

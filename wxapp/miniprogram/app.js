@@ -3,13 +3,9 @@ import {
 	bus
 } from './common/bus/index.js';
 
-import {
-	cloud
-} from './common/cloud/index.js';
+import {cloud} from './common/cloud/index.js';
 
-import {
-	formatTime
-} from './utils/util.js';
+import {formatTime} from './utils/util.js';
 
 let env = 'chiyao-ct0yu';
 
@@ -24,12 +20,13 @@ App({
 		this.db = wx.cloud.database({env: env});
 		
 		bus.$on('get_medication_reminder',(callBack)=>{
-
+			
 			if(typeof this.user.medication_reminder !== 'undefined'){
 				callBack({total:this.user.medication_reminder})
 			}else{
 				this.callBack = callBack;
 			}
+
 		})
 		
 		let data = await cloud.call('login');
